@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-commands-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-commands
+  template:
+    metadata:
+      labels:
+        app: user-commands
+    spec:
+      containers:
+        - name: user-commands
+          image: fadeleafj/user-commands
+          env:
+            - name: EVENTSTOREURL
+              value: 'http://eventstore-srv:2113'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-commands-srv
+spec:
+  selector:
+    app: user-commands
+  ports:
+    - name: user-commands
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

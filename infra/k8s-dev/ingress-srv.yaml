@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: eventstore.dev
+      http:
+        paths:
+          - path: /c/users/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: user-commands-srv
+                port:
+                  number: 3000
+          - path: /q/users/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: user-queries-srv
+                port:
+                  number: 3000
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: user-commands-srv
+                port:
+                  number: 3000

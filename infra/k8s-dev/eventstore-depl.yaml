@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventstore-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventstore
+  template:
+    metadata:
+      labels:
+        app: eventstore
+    spec:
+      containers:
+        - name: eventstore
+          image: eventstore/eventstore:latest
+          args:
+            [
+              '--name',
+              'esdb-node',
+              '-p',
+              '2113:2113',
+              '-p',
+              '1113:1113',
+              '--insecure',
+              '--run-projections',
+              'All',
+            ]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventstore-srv
+spec:
+  selector:
+    app: eventstore
+  ports:
+    - name: client
+      protocol: TCP
+      port: 2113
+      targetPort: 2113
+    - name: monitoring
+      protocol: TCP
+      port: 1113
+      targetPort: 1113

@@ -1,0 +1,35 @@
+
+GET http://127.0.0.1:3001/api/users/random HTTP/1.1
+
+################################
+
+POST http://127.0.0.1:3000/api/users HTTP/1.1
+content-type: application/json
+
+{
+  "email": "Einar0@hotmail.com",
+  "password": "9gt7uWuf4pQXezl",
+  "firstName": "Wilbert",
+  "lastName": "Lesch",
+  "street": "0908 Windler Drive",
+  "city": "Nikkoborough",
+  "state": "FL",
+  "zip": "46098"
+}
+
+################################
+
+GET http://127.0.0.1:3001/api/users HTTP/1.1
+
+################################
+
+POST http://127.0.0.1:3000/api/users/7511a1ff-aea9-44a5-906e-42c359b1ab6d
+content-type: application/json
+
+{
+  "lastName": "Jones"
+}
+
+################################
+
+DELETE http://127.0.0.1:3000/api/users/7511a1ff-aea9-44a5-906e-42c359b1ab6d

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-queries-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-queries
+  template:
+    metadata:
+      labels:
+        app: user-queries
+    spec:
+      containers:
+        - name: user-queries
+          image: fadeleafj/user-queries
+          env:
+            - name: EVENTSTOREURL
+              value: 'http://eventstore-srv:2113'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-queries-srv
+spec:
+  selector:
+    app: user-queries
+  ports:
+    - name: user-queries
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

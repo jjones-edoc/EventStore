@@ -1,0 +1,35 @@
+
+GET http://127.0.0.1:3000/api/users/random HTTP/1.1
+
+################################
+
+POST http://127.0.0.1:3000/api/users HTTP/1.1
+content-type: application/json
+
+{
+  "email": "Sarina_Ratke91@gmail.com",
+  "password": "5O2WzwzXsQ3gXgZ",
+  "firstName": "Newell",
+  "lastName": "Kulas",
+  "street": "416 Joana Plains",
+  "city": "Lake Kayleigh",
+  "state": "NY",
+  "zip": "70295-9243"
+}
+
+################################
+
+GET http://127.0.0.1:3000/api/users HTTP/1.1
+
+################################
+
+POST http://127.0.0.1:3000/api/users/892242ad-9f28-46ff-908f-c581b328c0e0 HTTP/1.1
+content-type: application/json
+
+{
+  "lastName": "Jones"
+}
+
+################################
+
+DELETE http://127.0.0.1:3000/api/users/77730172-ee60-4942-8e04-252ff0a06d40 HTTP/1.1
